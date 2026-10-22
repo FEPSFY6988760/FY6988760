@@ -1,1 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The New Urban Planning Standard or Eco-Gentrification? A Report on Land Use, Livability and Equity in Barcelona's Superblocks</title>
 
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        .fluid-title {
+            font-size: clamp(1.5rem, 3vw + 1rem, 2.75rem);
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-200">
+
+    <!-- TOP READING PROGRESS BAR -->
+    <div class="fixed top-0 left-0 w-full h-1.5 bg-slate-200 dark:bg-slate-800 z-50 no-print">
+        <div id="reading-bar" class="h-full bg-brand-500 w-0 transition-all duration-75"></div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-800/90 backdrop-blur border-b border-slate-200 dark:border-slate-700 no-print">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-graduation-cap text-brand-600 text-2xl"></i>
+                <span class="font-bold text-lg hidden sm:inline">Conference Project</span>
+            </div>
+           
+            <div class="flex items-center space-x-3">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                </button>
+                <!-- Print Button -->
+                <button onclick="window.print()" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-sm font-medium flex items-center space-x-2">
+                    <i class="fa-solid fa-print"></i>
+                    <span class="hidden sm:inline">Print / PDF</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENT SECTIONS -->
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-6">
+       
+        <div id="Introduction_InText" class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <h2 class="font-bold text-lg mb-2 text-slate-900 dark:text-white">Introduction</h2>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Barcelona’s Superblock (Superilla) program is an innovative urban planning concept designed to put people at the center of the city by reallocating spaces that would otherwise be used for vehicles such as cars to pedestrians to encourage active mobility by restructuring the gridded street networks into pedestrian-prioritsed neighborhood units, making the city more walkable as a result with the added bonus of more green spaces. This is a win in terms of social impact, however, there is a disparity between the quality of life in specific areas of the superblocks, with the trend being that the internal streets tend to feel the improvements more than the adjacent arterial corridors, which experience more traffic and higher noise pollution levels. Environmentally, the model delivers on its promises of being more ecologically sound, delivering notable localised reductions in nitrogen dioxide emissions and particulate matter, in tandem with significantly less traffic noise. Furthermore, the increased environmental livability triggers green gentrification and property speculation, which can end up displacing the long-term residents who are supposed to be benefiting from this project. Economically, whilst tactical urbanism enables cost-effective spatial conversion, robust anti-displacement policies mixed with equity-driven site selection are vital to achieve systemic urban justice.</p>
+        </div>
+
+        <div id="Analysis_InText" class="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <h2 class="font-bold text-lg mb-2 text-slate-900 dark:text-white">Analysis</h2>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">The reallocation of street space from motor vehicles to pedestrians has been one of the many positives of this new Superblocks model. Historically, 85% of roads in Barcelona were  dedicated to vehicles, and 60% of public spaces were dedicated to motorized mobility (Amati, 2024), restricting the walkability of the city, overlooking efficient public transportation, which is considered to be a key feature of sustainable city design (SEUX, 2023). This new superblock model, however, aims to have the public space dedicated to pedestrians be no less than 70%, with a bigger focus on streets as the public spaces in contrast to the Modernists’ wide-open parklands, promoting walking through an urban grid. (Amati, 2024). By restructuring the 3x3 grid block units into internal circulation loops that are restricted to 10km/h, the model prevents through traffic whilst maintaining local service access. As a result of the traffic being pushed to the surrounding arterial streets (Rueda 2019) the model aims to lower the levels of noise and air pollution, in addition to converting the car-centered street spaces into green walkable streets, delivering on the promise of more pedestrian spaces.</p>
+        </div>
+
+        <!-- Word Count Display -->
+        <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <p id="totalWordCount" class="font-semibold text-sm text-slate-800 dark:text-slate-200"></p>
+        </div>
+
+        <!-- Last Commit Time Display -->
+        <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-between">
+            <span id="last-updated" class="text-sm text-slate-600 dark:text-slate-400">Loading last update time...</span>
+            <button onclick="verifyLastUpdatedTime()" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-xs font-medium transition-colors">
+                Verify Time
+            </button>
+        </div>
+
+    </main>
+
+    <!-- JAVASCRIPT FUNCTIONS -->
+    <script>
+        // 1. Dark Theme Toggle Setup
+        function initThemeToggle() {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+           
+            // Check saved theme or system preference
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                if (themeIcon) themeIcon.className = 'fa-solid fa-sun';
+            } else {
+                document.documentElement.classList.remove('dark');
+                if (themeIcon) themeIcon.className = 'fa-solid fa-moon';
+            }
+
+            // Add click listener
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', () => {
+                    document.documentElement.classList.toggle('dark');
+                    const isDark = document.documentElement.classList.contains('dark');
+                    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                    if (themeIcon) themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+                });
+            }
+        }
+
+        // 2. Reading Progress Bar Listener
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (docHeight > 0) {
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                document.getElementById('reading-bar').style.width = scrollPercent + '%';
+            }
+        });
+
+        // 3. Word Count Functions
+        function displayWordCount(sectionId) {
+            const el = document.getElementById(sectionId);
+            if (!el) return 0;
+            const text = el.textContent;
+            return text.trim().split(/\s+/).filter(Boolean).length;
+        }
+
+        function displayTotalWordCount() {
+            const introCount = displayWordCount("Introduction_InText");
+            const analysisCount = displayWordCount("Analysis_InText");
+            const total = introCount + analysisCount;
+            document.getElementById("totalWordCount").innerText = `Total word count: ${total} words`;
+        }
+
+        // 4. GitHub Last Commit Functions
+        async function getLastUpdatedTime() {
+            const username = 'FEPSFY6986502';
+            const repo = 'FY6986502';
+            const url = `https://api.github.com/repos/${username}/${repo}/commits`;
+           
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (!response.ok) throw new Error(`Status: ${response.status}`);
+                const commits = await response.json();
+               
+                if (commits && commits.length > 0) {
+                    const lastCommitDate = new Date(commits[0].commit.committer.date);
+                    document.getElementById('last-updated').innerText = `Last Modified Time: ${lastCommitDate.toLocaleString()}`;
+                } else {
+                    document.getElementById('last-updated').innerText = 'No commits found.';
+                }
+            } catch (error) {
+                console.error('Error fetching update time:', error);
+                document.getElementById('last-updated').innerText = 'Error fetching update time.';
+            }
+        }
+
+        async function verifyLastUpdatedTime() {
+            document.getElementById('last-updated').innerText = 'Verifying...';
+            await getLastUpdatedTime();
+            alert("Last modified time has been successfully verified from GitHub API.");
+        }
+
+        // Initialize all functions when the DOM is ready
+        window.addEventListener('DOMContentLoaded', () => {
+            initThemeToggle();
+            displayTotalWordCount();
+            getLastUpdatedTime();
+        });
+    </script>
+</body>
+</html>
